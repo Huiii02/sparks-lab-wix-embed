@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SparksLab - Names & Binding</title>
+    <title>SparksLab - Comprehensive Name & Binding</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -17,494 +17,428 @@
                     },
                     colors: {
                         brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0ea5e9', // Sky blue accent
-                            600: '#0284c7',
-                            900: '#0c4a6e',
+                            50: '#EEF2FF',
+                            100: '#E0E7FF',
+                            500: '#6366F1',
+                            600: '#4F46E5',
+                            900: '#312E81',
                         },
-                        slate: {
-                            850: '#1e293b', // Custom dark
+                        code: {
+                            bg: '#1E1E1E',
                         }
-                    },
-                    boxShadow: {
-                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-                        'glow': '0 0 15px rgba(14, 165, 233, 0.3)',
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Modern Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .code-window { box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); border-radius: 0.75rem; overflow: hidden; font-size: 0.875rem; }
+        .code-header { background: #2D2D2D; padding: 0.5rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .dot { width: 0.75rem; height: 0.75rem; border-radius: 50%; }
+        .code-body { background: #1E1E1E; padding: 1rem; color: #D4D4D4; overflow-x: auto; }
         
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
-        }
-
-        .code-window {
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
-        }
+        /* Syntax Highlighting Colors */
+        .kwd { color: #569CD6; } /* Keywords (blue) */
+        .var { color: #9CDCFE; } /* Variables (light blue) */
+        .str { color: #CE9178; } /* Strings (orange) */
+        .num { color: #B5CEA8; } /* Numbers (light green) */
+        .com { color: #6A9955; } /* Comments (green) */
+        .typ { color: #4EC9B0; } /* Types (teal) */
+        .fun { color: #DCDCAA; } /* Functions (yellow) */
     </style>
 </head>
-<body class="bg-slate-50 text-slate-600 font-sans antialiased selection:bg-brand-100 selection:text-brand-900">
+<body class="bg-slate-50 text-slate-700 font-sans antialiased">
 
-    <!-- Navigation Bar -->
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300 top-0">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-2 group cursor-pointer">
-                    <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform duration-300">
-                        <i class="fas fa-bolt text-sm"></i>
-                    </div>
-                    <span class="font-bold text-xl text-slate-800 tracking-tight">Sparks<span class="text-brand-600">Lab</span></span>
-                </div>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="#home" class="text-slate-500 hover:text-brand-600 px-4 py-2 rounded-lg text-sm font-medium transition-all hover:bg-brand-50">Home</a>
-                    <a href="#background" class="text-slate-500 hover:text-brand-600 px-4 py-2 rounded-lg text-sm font-medium transition-all hover:bg-brand-50">Background</a>
-                    <a href="#basic-elements" class="text-slate-500 hover:text-brand-600 px-4 py-2 rounded-lg text-sm font-medium transition-all hover:bg-brand-50">Elements</a>
-                    <a href="#sample-application" class="text-slate-500 hover:text-brand-600 px-4 py-2 rounded-lg text-sm font-medium transition-all hover:bg-brand-50">Application</a>
-                </div>
-
-                <!-- CTA Button -->
-                <div class="hidden md:block">
-                     <a href="#training-video" class="inline-flex items-center justify-center px-5 py-2 border border-transparent text-sm font-medium rounded-full text-white bg-slate-900 hover:bg-slate-800 transition-all shadow-md hover:shadow-lg">
-                        Training <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button class="mobile-menu-button text-slate-500 hover:text-slate-800 focus:outline-none p-2">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    </button>
-                </div>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav top-0">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white"><i class="fas fa-code"></i></div>
+                <span class="font-bold text-xl text-slate-800">Sparks<span class="text-brand-600">Lab</span></span>
             </div>
-        </div>
-        <!-- Mobile Dropdown -->
-        <div class="hidden mobile-menu md:hidden bg-white border-t border-slate-100 absolute w-full shadow-xl">
-            <div class="px-4 py-3 space-y-1">
-                <a href="#background" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-brand-600 hover:bg-slate-50">Background</a>
-                <a href="#basic-elements" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-brand-600 hover:bg-slate-50">Basic Elements</a>
-                <a href="#sample-application" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-brand-600 hover:bg-slate-50">Sample App</a>
+            <div class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#names" class="hover:text-brand-600 transition">Names & Syntax</a>
+                <a href="#memory" class="hover:text-brand-600 transition">Memory</a>
+                <a href="#binding" class="hover:text-brand-600 transition">Binding</a>
+                <a href="#scope" class="hover:text-brand-600 transition">Scope</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <!-- Abstract Background Shape -->
-        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[600px] h-[600px] bg-brand-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[400px] h-[400px] bg-indigo-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-600 text-xs font-semibold uppercase tracking-wider mb-6">
-                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span> Module 01: Core Concepts
-                </div>
-                <h1 class="text-5xl lg:text-7xl font-bold text-slate-900 tracking-tight mb-6 leading-tight">
-                    Mastering JavaScript <br/>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-600">Names & Binding</span>
-                </h1>
-                <p class="text-lg lg:text-xl text-slate-500 mb-10 leading-relaxed max-w-2xl mx-auto">
-                    A deep dive into identifiers, memory management, and the lifecycle of variables. From language design to runtime execution.
-                </p>
-                <div class="flex justify-center gap-4">
-                    <a href="#background" class="px-8 py-3.5 rounded-full bg-brand-600 text-white font-semibold shadow-glow hover:bg-brand-500 transition-all transform hover:-translate-y-1">Start Learning</a>
-                    <a href="#sample-application" class="px-8 py-3.5 rounded-full bg-white text-slate-700 font-semibold border border-slate-200 shadow-sm hover:border-brand-300 hover:text-brand-600 transition-all">View Examples</a>
-                </div>
-            </div>
+    <section class="pt-32 pb-20 px-6 bg-brand-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-slate-900 mb-6">Names & Binding in JavaScript</h1>
+            <p class="text-lg text-slate-600 mb-8">A comprehensive guide to identifiers, memory management, binding times, and scope based on your provided documentation.</p>
         </div>
     </section>
 
-    <!-- SECTION 1: BACKGROUND (Names & Syntax) -->
-    <section id="background" class="py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-slate-100 pb-8">
+    <!-- SECTION 1: NAMES & SYNTAX -->
+    <section id="names" class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="flex items-center gap-4 mb-10 border-b pb-4">
+            <span class="bg-brand-100 text-brand-600 py-1 px-3 rounded-full text-xs font-bold uppercase">Part 01</span>
+            <h2 class="text-3xl font-bold text-slate-900">Name Definition & Syntax</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <!-- Definition -->
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="text-xl font-bold text-brand-600 mb-4">Naming Rules</h3>
+                    <p class="mb-4">Name is a string of characters used to identify an entity. Names <strong>must start with</strong>:</p>
+                    <ul class="list-disc pl-5 space-y-2 mb-4">
+                        <li>Letters (a-z or A-Z)</li>
+                        <li>Underscore (_)</li>
+                        <li>Dollar sign ($)</li>
+                    </ul>
+                    <p class="mb-4">After the start, they can continue with:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Letters, Digits (0-9), Underscore, Dollar sign</li>
+                    </ul>
+                </div>
+
+                <div class="bg-red-50 p-6 rounded-2xl border border-red-100">
+                    <h3 class="text-lg font-bold text-red-600 mb-2"><i class="fas fa-exclamation-circle mr-2"></i>Restrictions</h3>
+                    <p>A name <strong>cannot</strong> start with numbers/digits!</p>
+                    <p>Names cannot include special characters: <code>-</code>, <code>@</code>, <code>#</code>, <code>!</code>, <code>?</code>, <code>*</code>, or <strong>space</strong>.</p>
+                </div>
+            </div>
+
+            <!-- Code Examples (From your images) -->
+            <div class="space-y-6">
+                <!-- Valid Names -->
+                <div class="code-window">
+                    <div class="code-header"><div class="dot bg-red-500"></div><div class="dot bg-yellow-500"></div><div class="dot bg-green-500"></div><span class="ml-2 text-slate-400">valid_names.js</span></div>
+                    <pre class="code-body"><code><span class="kwd">let</span> <span class="var">carName1</span> = <span class="str">"Volvo XC60"</span>;
+<span class="kwd">let</span> <span class="var">carName2</span> = <span class="str">'Volvo XC60'</span>;
+
+<span class="kwd">let</span> <span class="var">_lastName</span> = <span class="str">"Johnson"</span>;
+<span class="kwd">let</span> <span class="var">_x</span> = <span class="num">2</span>;
+<span class="kwd">let</span> <span class="var">_100</span> = <span class="num">5</span>;
+
+<span class="kwd">let</span> <span class="var">$</span> = <span class="str">"Hello World"</span>;
+<span class="kwd">let</span> <span class="var">$$$</span> = <span class="num">2</span>;
+<span class="kwd">let</span> <span class="var">$myMoney</span> = <span class="num">5</span>;</code></pre>
+                </div>
+
+                <!-- Invalid Names -->
+                <div class="code-window">
+                    <div class="code-header"><div class="dot bg-red-500"></div><div class="dot bg-yellow-500"></div><div class="dot bg-green-500"></div><span class="ml-2 text-slate-400">errors.js</span></div>
+                    <pre class="code-body"><code><span class="kwd">let</span> 1name;   <span class="com">// error, start with digit not allow</span>
+<span class="kwd">let</span> name 1;  <span class="com">// error, space not allow</span>
+<span class="kwd">let</span> name-1;  <span class="com">// error, hyphen not allow</span></code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Design Issues Section -->
+        <div class="mt-12 bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+            <h3 class="text-2xl font-bold text-slate-900 mb-6">Design Issues & Keywords</h3>
+            <div class="grid md:grid-cols-3 gap-8">
                 <div>
-                    <span class="text-brand-600 font-bold tracking-widest uppercase text-xs mb-2 block">Part 01</span>
-                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900">Names & Syntax Rules</h2>
-                </div>
-                <p class="text-slate-500 max-w-md mt-4 md:mt-0 text-right md:text-left">Understanding valid identifiers is the first step to writing error-free JavaScript.</p>
-            </div>
-
-            <div class="grid lg:grid-cols-2 gap-12 items-start">
-                <!-- Naming Rules Card -->
-                <div class="bg-white rounded-2xl p-8 shadow-soft border border-slate-100 hover:shadow-lg transition-all duration-300">
-                    <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-green-600 mb-6">
-                        <i class="fas fa-check text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-800 mb-3">Allowed Patterns</h3>
-                    <p class="text-slate-500 mb-6">Identifiers must start with a letter, underscore (_), or dollar sign ($). Subsequent characters can include digits.</p>
-                    
-                    <!-- Code Block -->
-                    <div class="rounded-xl overflow-hidden bg-slate-850 code-window">
-                        <div class="flex items-center gap-1.5 px-4 py-3 bg-slate-900 border-b border-slate-700">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span class="ml-3 text-xs text-slate-400 font-mono">valid-names.js</span>
-                        </div>
-                        <div class="p-6 overflow-x-auto">
-<pre class="font-mono text-sm leading-relaxed"><code class="text-slate-300"><span class="text-purple-400">let</span> <span class="text-blue-400">carName1</span> = <span class="text-green-400">"Volvo XC60"</span>;
-<span class="text-purple-400">let</span> <span class="text-blue-400">_private</span> = <span class="text-orange-400">2</span>;
-<span class="text-purple-400">let</span> <span class="text-blue-400">$price</span> = <span class="text-orange-400">99.50</span>;
-<span class="text-purple-400">let</span> <span class="text-blue-400">$$$</span> = <span class="text-orange-400">1000</span>;</code></pre>
-                        </div>
+                    <h4 class="font-bold text-brand-600">Case Sensitivity</h4>
+                    <p class="text-sm mt-2">JavaScript is case-sensitive. Upper and lower case letters are different attributes.</p>
+                    <div class="mt-3 bg-slate-900 p-3 rounded text-xs font-mono text-white">
+                        <span class="kwd">let</span> <span class="var">lastName</span> = <span class="str">"Doe"</span>;<br>
+                        <span class="kwd">let</span> <span class="var">lastname</span> = <span class="str">"Peterson"</span>;
                     </div>
                 </div>
-
-                <!-- Restrictions Card -->
-                <div class="bg-white rounded-2xl p-8 shadow-soft border border-slate-100 hover:shadow-lg transition-all duration-300">
-                    <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-600 mb-6">
-                        <i class="fas fa-times text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-800 mb-3">Strict Restrictions</h3>
-                    <p class="text-slate-500 mb-6">Names cannot start with digits. No special characters like hyphens or spaces are allowed. JavaScript is also <strong>case-sensitive</strong>.</p>
-                    
-                    <!-- Code Block -->
-                    <div class="rounded-xl overflow-hidden bg-slate-850 code-window">
-                        <div class="flex items-center gap-1.5 px-4 py-3 bg-slate-900 border-b border-slate-700">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span class="ml-3 text-xs text-slate-400 font-mono">errors.js</span>
-                        </div>
-                        <div class="p-6 overflow-x-auto">
-<pre class="font-mono text-sm leading-relaxed"><code class="text-slate-300"><span class="text-slate-500">// ❌ Syntax Errors</span>
-<span class="text-purple-400">let</span> 1name;     <span class="text-slate-500">// Starts with digit</span>
-<span class="text-purple-400">let</span> my-name;   <span class="text-slate-500">// Hyphens not allowed</span>
-<span class="text-purple-400">let</span> user name; <span class="text-slate-500">// Spaces not allowed</span>
-
-<span class="text-slate-500">// ⚠️ Case Sensitive</span>
-<span class="text-blue-400">lastName</span> !== <span class="text-blue-400">lastname</span></code></pre>
-                        </div>
-                    </div>
+                <div>
+                    <h4 class="font-bold text-brand-600">Reserved Words</h4>
+                    <p class="text-sm mt-2">Words "reserved from use" for the future. Cannot be used as variable names.</p>
+                    <p class="text-xs mt-2 text-slate-500">Examples: <code>break</code>, <code>case</code>, <code>class</code>, <code>const</code>, <code>null</code>.</p>
                 </div>
-            </div>
-
-            <!-- Keywords Strip -->
-            <div class="mt-12 bg-slate-50 rounded-2xl p-8 border border-slate-200">
-                <div class="flex flex-col md:flex-row gap-8 items-center">
-                    <div class="md:w-1/3">
-                        <h4 class="text-lg font-bold text-slate-900 mb-2">Reserved Keywords</h4>
-                        <p class="text-sm text-slate-500">Words reserved by the language syntax cannot be used as variable names.</p>
-                    </div>
-                    <div class="md:w-2/3 flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-white border border-slate-200 rounded text-xs font-mono text-purple-600">class</span>
-                        <span class="px-3 py-1 bg-white border border-slate-200 rounded text-xs font-mono text-purple-600">return</span>
-                        <span class="px-3 py-1 bg-white border border-slate-200 rounded text-xs font-mono text-purple-600">const</span>
-                        <span class="px-3 py-1 bg-white border border-slate-200 rounded text-xs font-mono text-purple-600">let</span>
-                        <span class="px-3 py-1 bg-white border border-slate-200 rounded text-xs font-mono text-purple-600">function</span>
-                        <span class="px-3 py-1 bg-white border border-slate-200 rounded text-xs font-mono text-purple-600">if</span>
-                        <span class="px-3 py-1 bg-white border border-slate-200 rounded text-xs font-mono text-purple-600">else</span>
-                        <span class="px-3 py-1 bg-white border border-slate-200 rounded text-xs font-mono text-purple-600">import</span>
-                        <span class="px-3 py-1 bg-white border border-slate-200 rounded text-xs font-mono text-slate-400 italic">+ many more</span>
-                    </div>
+                <div>
+                    <h4 class="font-bold text-brand-600">Keywords</h4>
+                    <p class="text-sm mt-2">Words defined by the language syntax with special meaning.</p>
+                    <p class="text-xs mt-2 text-slate-500">Examples: <code>if</code>, <code>else</code>, <code>function</code>, <code>return</code>.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2: MEMORY (Dark Mode Contrast) -->
-    <section id="basic-elements" class="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <!-- Background Grid -->
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#64748b 1px, transparent 1px); background-size: 32px 32px;"></div>
-        
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-20">
-                <span class="text-brand-500 font-bold tracking-widest uppercase text-xs mb-3 block">Part 02</span>
-                <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">Memory & Data Types</h2>
-                <p class="text-slate-400 max-w-2xl mx-auto text-lg">JavaScript creates bindings in memory automatically. Understanding where your data lives (Stack vs. Heap) is crucial for performance.</p>
+    <!-- SECTION 2: MEMORY & ADDRESS -->
+    <section id="memory" class="py-20 px-6 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-4 mb-10 border-b border-slate-700 pb-4">
+                <span class="bg-brand-500 text-white py-1 px-3 rounded-full text-xs font-bold uppercase">Part 02</span>
+                <h2 class="text-3xl font-bold">Address & Memory Management</h2>
             </div>
 
-            <div class="grid lg:grid-cols-3 gap-8">
-                <!-- Stack Memory -->
-                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 hover:border-brand-500 transition-colors group">
-                    <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center text-brand-400 mb-6 group-hover:bg-brand-500 group-hover:text-white transition-all">
-                        <i class="fas fa-layer-group text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Stack Memory</h3>
-                    <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-                        Stores static data with fixed size. Fast access, simple structure.
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-bold text-brand-400 mb-4">Memory Address</h3>
+                    <p class="text-slate-300 leading-relaxed mb-6">
+                        In JavaScript, every variable has its own memory address internally, but it <strong>does not expose or allow direct access</strong> to the addresses. This ensures safety and prevents accidental damage. JS is a high-level language using automatic memory management.
                     </p>
-                    <div class="bg-slate-900 rounded-lg p-4 border border-slate-700">
-                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 block">Primitive Types</span>
-                        <ul class="space-y-2 text-sm text-slate-300 font-mono">
-                            <li class="flex justify-between"><span>Number</span> <span class="text-brand-400">100</span></li>
-                            <li class="flex justify-between"><span>String</span> <span class="text-green-400">"Hi"</span></li>
-                            <li class="flex justify-between"><span>Boolean</span> <span class="text-purple-400">true</span></li>
-                            <li class="flex justify-between"><span>Null</span> <span class="text-slate-500">null</span></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Heap Memory -->
-                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 hover:border-purple-500 transition-colors group">
-                    <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center text-purple-400 mb-6 group-hover:bg-purple-500 group-hover:text-white transition-all">
-                        <i class="fas fa-cubes text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Heap Memory</h3>
-                    <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-                        Stores complex objects and dynamic data. Slower access, flexible size.
-                    </p>
-                    <div class="bg-slate-900 rounded-lg p-4 border border-slate-700">
-                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 block">Reference Types</span>
-                        <ul class="space-y-2 text-sm text-slate-300 font-mono">
-                            <li class="flex justify-between"><span>Object</span> <span class="text-purple-400">{...}</span></li>
-                            <li class="flex justify-between"><span>Array</span> <span class="text-purple-400">[1,2]</span></li>
-                            <li class="flex justify-between"><span>Function</span> <span class="text-yellow-400">()=></span></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Garbage Collection -->
-                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 hover:border-green-500 transition-colors group">
-                    <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center text-green-400 mb-6 group-hover:bg-green-500 group-hover:text-white transition-all">
-                        <i class="fas fa-recycle text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Garbage Collection</h3>
-                    <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-                        Automatic memory management. JS uses the "Mark-and-Sweep" algorithm to free up memory.
-                    </p>
-                    <div class="bg-slate-900 rounded-lg p-4 border border-slate-700 h-32 flex items-center justify-center text-center">
-                        <p class="text-xs text-slate-500">
-                            "If a variable is no longer reachable, sweep it away."
+                    
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                        <h4 class="font-bold text-white mb-2"><i class="fas fa-recycle mr-2"></i>Garbage Collection</h4>
+                        <p class="text-sm text-slate-400">
+                            JavaScript uses the <strong>Mark-and-Sweep</strong> algorithm. It monitors memory allocation and determines which parts are not used.
                         </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 3: APPLICATION (Complex Layout) -->
-    <section id="sample-application" class="py-24 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="mb-16">
-                <span class="text-brand-600 font-bold tracking-widest uppercase text-xs mb-2 block">Part 03</span>
-                <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Binding Time & Scope</h2>
-                <div class="h-1 w-20 bg-brand-500 rounded-full"></div>
-            </div>
-
-            <!-- Timeline Style Layout -->
-            <div class="relative border-l-2 border-slate-200 ml-4 md:ml-6 space-y-16">
-                
-                <!-- 1. Design Time -->
-                <div class="relative pl-8 md:pl-12">
-                    <span class="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-white border-4 border-brand-500"></span>
-                    <div class="flex flex-col xl:flex-row gap-8">
-                        <div class="xl:w-1/3">
-                            <h3 class="text-2xl font-bold text-slate-800 mb-2">Language Design Time</h3>
-                            <p class="text-slate-600 leading-relaxed">
-                                Rules fixed when the language specification (ECMAScript) was written. You cannot redefine operators or reserved keywords.
-                            </p>
-                        </div>
-                        <div class="xl:w-2/3 w-full">
-                            <div class="rounded-xl overflow-hidden bg-slate-850 shadow-lg code-window transform hover:scale-[1.01] transition-transform">
-                                <div class="px-4 py-2 bg-slate-900 border-b border-slate-700 flex justify-between items-center">
-                                    <span class="text-xs text-slate-400 font-mono">module.js</span>
-                                </div>
-                                <div class="p-4 overflow-x-auto">
-<pre class="font-mono text-sm"><code class="text-slate-300"><span class="text-purple-400">import</span> React <span class="text-purple-400">from</span> <span class="text-green-400">'react'</span>;
-<span class="text-slate-500">// 'import' is bound to module loading logic.</span>
-<span class="text-slate-500">// It cannot be used as a variable name.</span></code></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Compile Time -->
-                <div class="relative pl-8 md:pl-12">
-                    <span class="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-white border-4 border-brand-500"></span>
-                    <div class="flex flex-col xl:flex-row gap-8">
-                        <div class="xl:w-1/3">
-                            <h3 class="text-2xl font-bold text-slate-800 mb-2">Compile Time (Hoisting)</h3>
-                            <p class="text-slate-600 leading-relaxed">
-                                Before execution, the engine parses code and allocates memory for declarations. This is why you can call a function declared later in the file.
-                            </p>
-                        </div>
-                        <div class="xl:w-2/3 w-full">
-                            <div class="rounded-xl overflow-hidden bg-slate-850 shadow-lg code-window transform hover:scale-[1.01] transition-transform">
-                                <div class="px-4 py-2 bg-slate-900 border-b border-slate-700 flex justify-between items-center">
-                                    <span class="text-xs text-slate-400 font-mono">hoisting.js</span>
-                                </div>
-                                <div class="p-4 overflow-x-auto">
-<pre class="font-mono text-sm"><code class="text-slate-300"><span class="text-purple-400">export default</span> <span class="text-blue-400">App</span>;
-
-<span class="text-purple-400">function</span> <span class="text-blue-400">App</span>() {
-  <span class="text-slate-500">// The engine knows 'App' exists here</span>
-  <span class="text-slate-500">// before line-by-line execution begins.</span>
-}</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. Runtime -->
-                <div class="relative pl-8 md:pl-12">
-                    <span class="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-white border-4 border-brand-500"></span>
-                    <div class="flex flex-col xl:flex-row gap-8">
-                        <div class="xl:w-1/3">
-                            <h3 class="text-2xl font-bold text-slate-800 mb-2">Run Time Binding</h3>
-                            <p class="text-slate-600 leading-relaxed">
-                                The most common in JS. Variables get their type and value only when the line of code is actually executed.
-                            </p>
-                            <div class="mt-4 inline-block bg-blue-50 text-blue-700 px-3 py-1 rounded text-sm font-medium border border-blue-100">
-                                Dynamic Type Binding
-                            </div>
-                        </div>
-                        <div class="xl:w-2/3 w-full">
-                            <div class="rounded-xl overflow-hidden bg-slate-850 shadow-lg code-window transform hover:scale-[1.01] transition-transform">
-                                <div class="px-4 py-2 bg-slate-900 border-b border-slate-700 flex justify-between items-center">
-                                    <span class="text-xs text-slate-400 font-mono">runtime.js</span>
-                                </div>
-                                <div class="p-4 overflow-x-auto">
-<pre class="font-mono text-sm"><code class="text-slate-300"><span class="text-purple-400">const</span> [<span class="text-blue-400">index</span>, <span class="text-blue-400">setIndex</span>] = <span class="text-blue-400">useState</span>(<span class="text-orange-400">0</span>);
-<span class="text-slate-500">// 'index' is bound to Number type because 0 is assigned.</span>
-
-<span class="text-purple-400">const</span> [<span class="text-blue-400">isActive</span>, <span class="text-blue-400">setIsActive</span>] = <span class="text-blue-400">useState</span>(<span class="text-purple-400">true</span>);
-<span class="text-slate-500">// 'isActive' is bound to Boolean type.</span></code></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Scope Grid -->
-            <div class="mt-20 grid md:grid-cols-2 gap-8">
-                <div class="bg-slate-900 rounded-2xl p-8 text-white relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-                         <i class="fas fa-globe text-9xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Static Scoping</h3>
-                    <p class="text-slate-400 mb-6 leading-relaxed relative z-10">
-                        Inner functions access outer variables via the physical nesting in the source code.
-                    </p>
-                    <div class="bg-black/30 rounded-lg p-4 font-mono text-sm text-pink-300 relative z-10">
-                        DataProvider Scope <br/>
-                        &nbsp;&nbsp;└── startQuiz Scope (Access Granted)
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-soft group">
-                    <h3 class="text-2xl font-bold text-slate-800 mb-4">Local vs Global</h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        Variables inside a function are private. Variables at the top level are module-scoped.
-                    </p>
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                            <span class="text-sm font-mono text-slate-600">Global: visible everywhere</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                            <span class="text-sm font-mono text-slate-600">Local: visible only in block</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- SECTION 4: FOOTER & REFERENCES -->
-    <section id="training-video" class="bg-white border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-            <div class="flex flex-col lg:flex-row justify-between gap-12">
-                <div class="lg:w-1/3">
-                    <div class="flex items-center gap-2 mb-6">
-                         <div class="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white">
-                            <i class="fas fa-bolt text-sm"></i>
-                        </div>
-                        <span class="font-bold text-xl text-slate-800">Sparks<span class="text-brand-600">Lab</span></span>
-                    </div>
-                    <p class="text-slate-500 mb-6">Empowering developers with deep-dive modules into JavaScript internals.</p>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-brand-50 hover:text-brand-600 transition-colors"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-brand-50 hover:text-brand-600 transition-colors"><i class="fab fa-github"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-brand-50 hover:text-brand-600 transition-colors"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-
-                <div class="lg:w-2/3 grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h4 class="font-bold text-slate-900 mb-4">Academic References</h4>
-                        <ul class="space-y-3 text-sm text-slate-500">
-                            <li class="flex gap-2"><i class="fas fa-book-open text-brand-400 mt-1"></i> <span>Burch, C. (n.d.). Binding time.</span></li>
-                            <li class="flex gap-2"><i class="fas fa-book-open text-brand-400 mt-1"></i> <span>MDN Web Docs. (2025). Memory management.</span></li>
-                            <li class="flex gap-2"><i class="fas fa-book-open text-brand-400 mt-1"></i> <span>W3Schools. JavaScript Data Types.</span></li>
+                        <ul class="mt-3 space-y-2 text-sm text-slate-400">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i> Has reference? Keep it.</li>
+                            <li><i class="fas fa-trash text-red-500 mr-2"></i> No reference? Sweep it (remove).</li>
                         </ul>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-slate-900 mb-4">Upcoming Modules</h4>
-                        <ul class="space-y-3 text-sm text-slate-500">
-                            <li><a href="#" class="hover:text-brand-600 transition-colors">Event Loops & Concurrency</a></li>
-                            <li><a href="#" class="hover:text-brand-600 transition-colors">Prototypes & Inheritance</a></li>
-                            <li><a href="#" class="hover:text-brand-600 transition-colors">Functional Programming Patterns</a></li>
-                        </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-brand-400 mb-4">Storage Types</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-slate-800 p-4 rounded-lg">
+                            <span class="text-xs font-bold uppercase text-slate-500">Stack Memory</span>
+                            <h4 class="font-bold text-white">Primitive Types</h4>
+                            <p class="text-sm text-slate-400 mt-1">Simple data, cannot be changed.</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs font-mono">
+                                <div class="bg-slate-900 p-2 rounded">String: "Hello"</div>
+                                <div class="bg-slate-900 p-2 rounded">Number: 123</div>
+                                <div class="bg-slate-900 p-2 rounded">Boolean: true</div>
+                                <div class="bg-slate-900 p-2 rounded">Null / Undefined</div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-800 p-4 rounded-lg">
+                            <span class="text-xs font-bold uppercase text-slate-500">Heap Memory</span>
+                            <h4 class="font-bold text-white">Reference Types</h4>
+                            <p class="text-sm text-slate-400 mt-1">Complex data, holds reference to location.</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs font-mono">
+                                <div class="bg-slate-900 p-2 rounded">Object: {name: "A"}</div>
+                                <div class="bg-slate-900 p-2 rounded">Array: [1, 2, 3]</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-slate-100 mt-12 pt-8 text-center text-sm text-slate-400">
-                &copy; 2025 SparksLab Educational Series. All rights reserved.
+            <!-- Value & Aliases Info -->
+            <div class="mt-12 grid md:grid-cols-2 gap-8">
+                <div class="bg-slate-800 p-6 rounded-xl">
+                    <h4 class="font-bold text-white mb-2">Value & Type</h4>
+                    <p class="text-sm text-slate-400 mb-4">
+                        <strong>Value</strong> is the content of the memory. The left value is address, right value is content.<br>
+                        <strong>Type</strong> refers to the kind of value. JS is <em>dynamically typed</em> (type determined by value assigned).
+                    </p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-xl border-l-4 border-red-500">
+                    <h4 class="font-bold text-white mb-2">Aliases</h4>
+                    <p class="text-sm text-slate-400">
+                        When two or more variable names access the same memory location. While possible via pointers/references, it is <strong>harmful to readability</strong>.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <script>
-        const btn = document.querySelector("button.mobile-menu-button");
-        const menu = document.querySelector(".mobile-menu");
+    <!-- SECTION 3: BINDING CONCEPTS (All Code from Doc) -->
+    <section id="binding" class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="flex items-center gap-4 mb-10 border-b pb-4">
+            <span class="bg-brand-100 text-brand-600 py-1 px-3 rounded-full text-xs font-bold uppercase">Part 03</span>
+            <h2 class="text-3xl font-bold text-slate-900">Binding Time</h2>
+        </div>
+        <p class="mb-8 text-lg text-slate-600">A binding is an association between an identifier and a value/type/address. The moment this occurs is the <strong>Binding Time</strong>.</p>
 
-        btn.addEventListener("click", () => {
-            menu.classList.toggle("hidden");
-        });
+        <div class="space-y-12">
+            
+            <!-- 1. Language Design Time -->
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-1/3">
+                    <h3 class="text-xl font-bold text-brand-600">1. Language Design Time</h3>
+                    <p class="text-sm text-slate-600 mt-2">Fixed when language is defined (e.g., keywords like <code>import</code>, <code>const</code>). Cannot be redefined by programmer.</p>
+                </div>
+                <div class="lg:w-2/3 code-window">
+                    <div class="code-header"><span class="ml-2 text-slate-400">module_loading.js</span></div>
+                    <pre class="code-body"><code><span class="kwd">import</span> React <span class="kwd">from</span> <span class="str">'react'</span>;
+<span class="kwd">import</span> Start <span class="kwd">from</span> <span class="str">'./components/Start'</span>;
+<span class="kwd">import</span> Quiz <span class="kwd">from</span> <span class="str">'./components/Quiz'</span>;
+<span class="kwd">import</span> { DataProvider } <span class="kwd">from</span> <span class="str">'./context/dataContext'</span>;
 
-        // Smooth reveal animation on scroll (simple implementation)
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+<span class="com">// The keyword 'import' is bound here. You cannot use 'import' as a variable name.</span></code></pre>
+                </div>
+            </div>
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+            <!-- 2. Compile Time -->
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-1/3">
+                    <h3 class="text-xl font-bold text-brand-600">2. Compile Time (Hoisting)</h3>
+                    <p class="text-sm text-slate-600 mt-2">Corresponds to Creation Phase. Engine creates bindings in memory for variables/functions before execution.</p>
+                </div>
+                <div class="lg:w-2/3 code-window">
+                    <div class="code-header"><span class="ml-2 text-slate-400">hoisting.tsx</span></div>
+                    <pre class="code-body"><code>(<span class="kwd">alias</span>) <span class="kwd">function</span> <span class="fun">App</span>(): <span class="typ">JSX.Element</span>
+<span class="kwd">export default</span> App;
 
-        document.querySelectorAll('section > div').forEach((el) => {
-            el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
-            observer.observe(el);
-        });
-    </script>
+<span class="com">// 'App' name is bound to memory location during Compile Phase.</span></code></pre>
+                </div>
+            </div>
+
+            <!-- 3. Link Time -->
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-1/3">
+                    <h3 class="text-xl font-bold text-brand-600">3. Link Time</h3>
+                    <p class="text-sm text-slate-600 mt-2">When multiple files/modules are combined. Links imported variables to correct memory locations in exported files.</p>
+                </div>
+                <div class="lg:w-2/3 code-window">
+                    <div class="code-header"><span class="ml-2 text-slate-400">linking.js</span></div>
+                    <pre class="code-body"><code><span class="kwd">import</span> Start <span class="kwd">from</span> <span class="str">'./components/Start'</span>;
+<span class="kwd">import</span> Quiz <span class="kwd">from</span> <span class="str">'./components/Quiz'</span>;
+
+<span class="com">// Binding between 'Quiz' here and actual component file established.</span></code></pre>
+                </div>
+            </div>
+
+            <!-- 4. Run Time -->
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-1/3">
+                    <h3 class="text-xl font-bold text-brand-600">4. Run Time (Dynamic)</h3>
+                    <p class="text-sm text-slate-600 mt-2">Most common. Variables bound to values/types when line executes. <strong>Dynamic Type Binding</strong>.</p>
+                    <div class="mt-4 bg-yellow-50 p-3 rounded text-xs text-yellow-800 border border-yellow-200">
+                        <strong>Implicit Declaration:</strong> We use <code>const</code>/<code>let</code>, but type is implied by value (e.g., true = Boolean).
+                    </div>
+                </div>
+                <div class="lg:w-2/3 code-window">
+                    <div class="code-header"><span class="ml-2 text-slate-400">runtime.js</span></div>
+                    <pre class="code-body"><code><span class="com">// Memory allocated when this line runs</span>
+<span class="kwd">const</span> [<span class="var">questionIndex</span>, <span class="fun">setQuestionIndex</span>] = <span class="fun">useState</span>(<span class="num">0</span>);
+
+<span class="com">// Display Controlling States</span>
+<span class="kwd">const</span> [<span class="var">showStart</span>, <span class="fun">setShowStart</span>] = <span class="fun">useState</span>(<span class="kwd">true</span>); <span class="com">// Bound to Boolean</span>
+<span class="kwd">const</span> [<span class="var">showQuiz</span>, <span class="fun">setShowQuiz</span>] = <span class="fun">useState</span>(<span class="kwd">false</span>);   <span class="com">// Bound to Boolean</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: SCOPE & LIFETIME -->
+    <section id="scope" class="py-20 px-6 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-4 mb-10 border-b pb-4">
+                <span class="bg-brand-100 text-brand-600 py-1 px-3 rounded-full text-xs font-bold uppercase">Part 04</span>
+                <h2 class="text-3xl font-bold text-slate-900">Storage Binding & Scope</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <!-- Stack Dynamic -->
+                <div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Stack-Dynamic Variables</h3>
+                    <p class="text-sm text-slate-600 mb-4">Created when declaration reached. Deallocated when function ends. (Local variables/params).</p>
+                    <div class="code-window">
+                        <pre class="code-body"><code><span class="kwd">const</span> <span class="fun">checkAnswer</span> = (<span class="var">event</span>, <span class="var">selected</span>) => {
+    <span class="kwd">if</span> (!<span class="var">selectedAnswer</span>) {
+       <span class="com">// 'event' & 'selected' exist ONLY here</span>
+       <span class="fun">setCorrectAnswer</span>(<span class="var">question</span>.<span class="var">answer</span>);
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Heap Dynamic -->
+                <div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Implicit Heap-Dynamic</h3>
+                    <p class="text-sm text-slate-600 mb-4">Memory allocated on Heap automatically on assignment. (Arrays/Objects). Resizes automatically.</p>
+                    <div class="code-window">
+                        <pre class="code-body"><code><span class="kwd">const</span> [<span class="var">quizs</span>, <span class="fun">setQuizs</span>] = <span class="fun">useState</span>([]); 
+<span class="com">// Initialized as empty array on Heap</span>
+
+<span class="fun">useEffect</span>(() => {
+   <span class="fun">fetch</span>(<span class="str">'quiz.json'</span>)
+     .<span class="fun">then</span>(<span class="var">res</span> => <span class="var">res</span>.<span class="fun">json</span>())
+     .<span class="fun">then</span>(<span class="var">data</span> => <span class="fun">setQuizs</span>(<span class="var">data</span>)) 
+     <span class="com">// Heap expands automatically</span>
+}, []);</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scoping Types -->
+            <h3 class="text-2xl font-bold text-slate-900 mb-6">Scope Types</h3>
+            <div class="space-y-8">
+                
+                <!-- Static Scoping & Referencing Environment -->
+                <div class="bg-brand-50 p-6 rounded-2xl border border-brand-100">
+                    <h4 class="font-bold text-brand-700 text-lg mb-2">Static Scoping & Referencing Environment</h4>
+                    <p class="text-sm text-slate-700 mb-4">
+                        Scope determined by physical nesting. Inner function accesses outer function variables via <strong>Scope Chain</strong>.
+                    </p>
+                    <div class="code-window">
+                        <pre class="code-body"><code><span class="kwd">export const</span> <span class="fun">DataProvider</span> = ({<span class="var">children</span>}) => {
+    <span class="com">// Outer Scope variable</span>
+    <span class="kwd">const</span> [<span class="var">showStart</span>, <span class="fun">setShowStart</span>] = <span class="fun">useState</span>(<span class="kwd">true</span>);
+
+    <span class="com">// Inner Scope</span>
+    <span class="kwd">const</span> <span class="fun">startQuiz</span> = () => {
+        <span class="com">// Accesses 'setShowStart' from outer DataProvider</span>
+        <span class="fun">setShowStart</span>(<span class="kwd">false</span>);
+        <span class="fun">setShowQuiz</span>(<span class="kwd">true</span>);
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Local vs Global -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-2">Local Scope</h4>
+                        <p class="text-sm text-slate-600 mb-2">Visible only within the unit/block.</p>
+                        <div class="code-window">
+                            <pre class="code-body"><code><span class="kwd">const</span> <span class="fun">Quiz</span> = () => {
+  <span class="com">// LOCAL to Quiz function only</span>
+  <span class="kwd">const</span> { <span class="var">question</span>, <span class="var">quizs</span> } = 
+     <span class="fun">useContext</span>(<span class="typ">DataContext</span>);
+}</code></pre>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-2">Global Scope</h4>
+                        <p class="text-sm text-slate-600 mb-2">Visible to entire program/file (top level).</p>
+                        <div class="code-window">
+                            <pre class="code-body"><code><span class="com">// Declared at top level</span>
+<span class="kwd">const</span> <span class="typ">DataContext</span> = <span class="fun">createContext</span>({});
+
+<span class="kwd">export const</span> <span class="fun">DataProvider</span> = ...
+<span class="com">// Exported = visible elsewhere</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Named Constant -->
+                <div class="bg-gray-100 p-6 rounded-2xl">
+                    <h4 class="font-bold text-slate-800 mb-2">Named Constants</h4>
+                    <p class="text-sm text-slate-600 mb-2">
+                        <code>const</code> defines a <strong>constant reference</strong>. You cannot reassign the variable, but if it's an object/array, you can modify contents.
+                    </p>
+                    <div class="code-window">
+                         <pre class="code-body"><code><span class="kwd">const</span> <span class="fun">checkAnswer</span> = (...) => { ... }
+<span class="com">// checkAnswer reference cannot be changed</span></code></pre>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- References -->
+    <section class="py-12 px-6 bg-slate-900 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto">
+            <h3 class="text-white font-bold text-lg mb-6">References</h3>
+            <ul class="space-y-2 font-mono text-xs">
+                <li>Burch, C. (n.d.). Binding time. Retrieved from cburch.com</li>
+                <li>edureka. (2019). What are JavaScript Reserved Words and Keywords?</li>
+                <li>GeeksforGeeks. (n.d.). Stack vs Heap Memory Allocation.</li>
+                <li>JavaScript Tutorial. (n.d.). JavaScript Execution Context.</li>
+                <li>MDN Web Docs. (2025). Memory management; Binding; Grammar and types; Modules; Scope.</li>
+                <li>NamasteDev. (n.d.). Understanding JavaScript Hoisting.</li>
+                <li>W3Schools. JavaScript Data Types; const; Variables.</li>
+            </ul>
+            <div class="mt-8 border-t border-slate-800 pt-8 text-center">
+                &copy; 2025 SparksLab. All content based on "Part - Name and binding.docx".
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
